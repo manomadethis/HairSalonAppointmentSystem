@@ -91,6 +91,16 @@ public class AppointmentTableModel extends AbstractTableModel {
         fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
     }
 
+    public void updateAppointment(Appointment appointment, int rowIndex) {
+        appointments.set(rowIndex, appointment);
+        fireTableRowsUpdated(rowIndex, rowIndex);
+    }
+
+    public void removeAppointment(int rowIndex) {
+        appointments.remove(rowIndex);
+        fireTableRowsDeleted(rowIndex, rowIndex);
+    }
+    
     //Getters
     public Appointment getAppointmentAt(int rowIndex) {
         return appointments.get(rowIndex);

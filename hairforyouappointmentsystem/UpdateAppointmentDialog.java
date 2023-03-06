@@ -2,25 +2,12 @@ package hairforyouappointmentsystem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UpdateAppointmentDialog extends JDialog {
 
     private Appointment appointment;
-    private AppointmentDao appointmentDao;
-    private JTextField idField;
-    private JTextField nameField;
-    private JTextField numberField;
-    private JTextField addressField;
-    private JTextField dateField;
-    private JTextField timeField;
-    private JButton okButton;
-    private JButton cancelButton;
-
     public UpdateAppointmentDialog(JFrame parent, AppointmentDao appointmentDao, Appointment appointment) {
         super(parent, "Update Appointment", true);
-        this.appointmentDao = appointmentDao;
         this.appointment = appointment;
 
         JPanel panel = new JPanel(new GridBagLayout());

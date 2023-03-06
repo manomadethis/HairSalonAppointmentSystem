@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginSystem implements ActionListener {
@@ -74,7 +73,6 @@ public class LoginSystem implements ActionListener {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
-                    ArrayList<Appointment> appointments = new ArrayList<>();
                     AppointmentGUI appointmentGUI = new AppointmentGUI();
                     appointmentGUI.setVisible(true);
                 } else {

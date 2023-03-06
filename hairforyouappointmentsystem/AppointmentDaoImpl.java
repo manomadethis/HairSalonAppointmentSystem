@@ -82,6 +82,18 @@ public class AppointmentDaoImpl implements AppointmentDao {
         }
     }
 
+    /*
+    public void removeAppointment(int id) throws SQLException {
+        try (Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM appointments WHERE id = ?")) {
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new SQLException("Unexpected rows affected: " + rowsAffected);
+            }
+    }
+     */
+
     public List<Appointment> getAppointments() {
         List<Appointment> appointments = new ArrayList<>();
         try {

@@ -1,11 +1,7 @@
 package hairforyouappointmentsystem;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-
 import java.awt.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentGUI extends JFrame {
@@ -29,23 +25,11 @@ public class AppointmentGUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Initialize the AppointmentDaoImpl object
-        try {
-            appointmentDao = new AppointmentDaoImpl();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error initializing appointment data: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
+        appointmentDao = new AppointmentDaoImpl();
 
         // Get the appointment data from the database
         List<Appointment> appointments = null;
-        try {
-            appointments = appointmentDao.getAppointments();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error retrieving appointment data: " + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        appointments = appointmentDao.getAppointments();
 
         // Create the GUI components
         titleLabel = new JLabel("Appointments");
@@ -89,6 +73,7 @@ public class AppointmentGUI extends JFrame {
         });
 
         // Action Listener for Update Appointment
+        // Action Listener for Update Appointment
         updateButton.addActionListener(e -> {
             int selectedRow = appointmentTable.getSelectedRow();
             if (selectedRow == -1) {
@@ -99,19 +84,13 @@ public class AppointmentGUI extends JFrame {
             Appointment appointment = ((AppointmentTableModel) appointmentTable.getModel()).getAppointmentAt(selectedRow);
             UpdateAppointmentDialog updateAppointmentDialog = new UpdateAppointmentDialog(this, appointmentDao, appointment);
             updateAppointmentDialog.setVisible(true);
-            Appointment updatedAppointment = updateAppointment.getAppointment();
+            Appointment updatedAppointment = updateAppointmentDialog.getAppointment();
             if (updatedAppointment != null) {
-                try {
-                    appointmentDao.updateAppointment(updatedAppointment);
-                    ((AppointmentTableModel) appointmentTable.getModel()).updateAppointment(selectedRow, updatedAppointment);
-                } 
-                catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Error updating appointment: " + ex.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
-                }
+                appointmentDao.updateAppointment(updatedAppointment);
+                ((AppointmentTableModel) appointmentTable.getModel()).updateAppointment(updatedAppointment, selectedRow);
             }
-        });        
-
+        });
+        
         // Action Listener for Remove Appointment
         removeButton.addActionListener(e -> {
             int selectedRow = appointmentTable.getSelectedRow();
@@ -120,17 +99,14 @@ public class AppointmentGUI extends JFrame {
             } else {
                 int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this appointment?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (confirmation == JOptionPane.OK_OPTION) {
-                    Appointment appointment = ((AppointmentTableModel) appointmentTable.getModel()).getAppointment(selectedRow);
-                    try {
-                        appointmentDao.removeAppointment(appointment);
-                        ((AppointmentTableModel) appointmentTable.getModel()).removeAppointment(selectedRow);
-                    } catch (SQLException e1) {
-                        JOptionPane.showMessageDialog(this, "Error removing appointment: " + e1.getMessage(), "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
+                    ((AppointmentTableModel) appointmentTable.getModel()).getAppointmentAt(selectedRow);
+                    RemoveAppointmentDialog.showDialog(AppointmentGUI.this, appointmentDao);
+                    ((AppointmentTableModel) appointmentTable.getModel()).removeAppointment(selectedRow);
                 }
             }
         });
+        
+
 
     }
 }

@@ -16,14 +16,10 @@ public class AddAppointmentDialog extends JDialog {
     private JButton okButton;
     private JButton cancelButton;
 
-    private AppointmentDao appointmentDao;
-
     private Appointment appointment;
 
     public AddAppointmentDialog(JFrame parent, AppointmentDao appointmentDao) {
         super(parent, "Add Appointment", true);
-        this.appointmentDao = appointmentDao;
-
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
