@@ -1,7 +1,9 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginSystem implements ActionListener {
 
@@ -69,7 +71,9 @@ public class LoginSystem implements ActionListener {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
-                    AppointmentManagement AppointmentManager = new AppointmentManagement(userID);
+                    ArrayList<Appointment> appointments = new ArrayList<>();
+                    AppointmentGUI appointmentGUI = new AppointmentGUI(appointments);
+                    appointmentGUI.setVisible(true);
                 } else {
                     messageLabel.setForeground(Color.red);
                     messageLabel.setText("Wrong password");
@@ -77,7 +81,7 @@ public class LoginSystem implements ActionListener {
 
             } else {
                 messageLabel.setForeground(Color.red);
-                messageLabel.setText("username not found");
+                messageLabel.setText("Username not found");
             }
         }
     }
