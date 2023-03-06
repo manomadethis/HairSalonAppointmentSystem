@@ -1,4 +1,7 @@
+package hairforyouappointmentsystem;
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,14 +57,14 @@ public class LoginSystem implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent click) {
 
-        if (e.getSource() == resetButton) {
+        if (click.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
         }
 
-        if (e.getSource() == loginButton) {
+        if (click.getSource() == loginButton) {
 
             String userID = userIDField.getText();
             String password = String.valueOf(userPasswordField.getPassword());
@@ -72,7 +75,7 @@ public class LoginSystem implements ActionListener {
                     messageLabel.setText("Login successful");
                     frame.dispose();
                     ArrayList<Appointment> appointments = new ArrayList<>();
-                    AppointmentGUI appointmentGUI = new AppointmentGUI(appointments);
+                    AppointmentGUI appointmentGUI = new AppointmentGUI();
                     appointmentGUI.setVisible(true);
                 } else {
                     messageLabel.setForeground(Color.red);

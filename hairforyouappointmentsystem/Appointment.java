@@ -1,6 +1,9 @@
+package hairforyouappointmentsystem;
+
 public class Appointment {
 
     // Instance variables
+    private int customerID;
     private String customerName;
     private String customerNumber;
     private String customerAddress;
@@ -8,7 +11,8 @@ public class Appointment {
     private String time;
 
     // Constructor
-    public Appointment(String customerName, String customerNumber, String customerAddress, String date, String time) {
+    public Appointment(int customerID, String customerName, String customerNumber, String customerAddress, String date, String time) {
+        this.customerID = customerID;
         this.customerName = customerName;
         this.customerNumber = customerNumber;
         this.customerAddress = customerAddress;
@@ -17,6 +21,10 @@ public class Appointment {
     }
 
     // Getters and setters
+    public int getCustomerID() {
+        return customerID;
+    }
+
     public String getCustomerName() {
         return customerName;
     }
@@ -58,6 +66,7 @@ public class Appointment {
     }
 
     // Override toString() method to display appointment information
+    /*
     @Override
     public String toString() {
         return "ID: " + hashCode() + "\n" +
@@ -67,4 +76,5 @@ public class Appointment {
                 "Date: " + date + "\n" +
                 "Time: " + time + "\n";
     }
+    */
 }
